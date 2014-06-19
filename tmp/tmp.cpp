@@ -306,7 +306,11 @@ Maze* MazeGame::CreateMaze(MazeFactory& factory) {
 
 
 
-
+int main() {
+	MazeGame game;
+	game.CreateMaze(*MazeFactory::GetInstance());
+	return 0;
+}
 
 
 
