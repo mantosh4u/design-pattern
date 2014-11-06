@@ -25,7 +25,10 @@ void List<Item>::Append(Item obj) {
 
 template <typename Item>
 void List<Item>::Remove(Item obj) {
-    _collection.erase(std::find(std::begin(_collection), std::end(_collection), std::move(obj)));
+    auto pos = std::find(std::begin(_collection), std::end(_collection), obj);
+    if (pos != std::end(_collection)) {
+        _collection.erase(pos);
+    }
 }
 
 template <typename Item>
