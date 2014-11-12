@@ -1,0 +1,114 @@
+
+1. Describe the object oriented expression tree case study
+
+Expression_Tree expr_tree = ..;
+Print_Visitor print_visitor;
+for (auto &iter : expr_tree)
+	iter.accept(print_visitor);
+
+
+3. Expression tree consists of nodes containing operators and operands.
+
+binary and uniary nodes.
+
+leaf nodes
+
+Operator locations in the tree unambiguously designate precedence.
+
+
+Operands can be intergers/doubles/variables etc...
+
+
+in-order
+pre-order
+post-order
+level-order
+
+The evaluation step may perform
+various actions, e.g.:
+• Print contents of expression tree
+• Return the “value" of the
+expression tree
+• Perform semantic analysis &
+optimization
+• Generate code
+• etc.
+
+
+
+class Component_Node { };
+
+class Composite_Unary_Node: public Component_Node { };
+
+class Composite_Unary_Node: public Leaf_Node { };
+
+class Composite_Binary_Node: public Composite_Unary_Node 
+{
+public:
+
+private:
+	Component_Node* firstOperand;
+   Component_Node* secondOperand;
+};
+
+
+class Composite_Add_Node: public Composite_Binary_Node { }
+
+
+class Composite_Subtract_Node: public Composite_Binary_Node { }
+
+
+class Composite_Multiply_Node: public Composite_Binary_Node { }
+
+
+class Composite_Divide_Node: public Composite_Binary_Node { }
+
+
+
+
+
+
+
+std::for_each
+(expr_tree.begin(), expr_tree.end(),
+[&print_visitor](const Expression_Tree &t){ t.accept(print_visitor);});
+
+
+
+
+
+Expression_Tree expr_tree (new Composite_Add_Node(new Leaf_Node (3),new Leaf_Node (4)) );
+
+Print_Visitor print_visitor;
+
+
+for(auto iter = expr_tree.begin(); iter!= expr_tree.end(); ++iter) {
+	(*iter).accept(print_visitor);	
+}
+
+
+
+
+
+
+
+
+
+class Pre_Order_ET_Iterator_Impl: public ET_Iterator_Impl {
+public:
+	Pre_Order_ET_Iterator_Impl (const Expression_Tree &root) {
+		stack_.push(root);
+	}
+	// Need to optimize this operation to avoid overhead of “deep copies”
+	// ...
+private:
+	std::stack<Expression_Tree> stack_;
+};
+
+
+
+
+
+
+
+
